@@ -1,23 +1,31 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import { History } from './components/History';
+import { SubscribeForm } from './components/SubscribeForm';
+
+import React from 'react';
+import { MarketData } from './components/MarketData';
+import Spinner from './components/Spinner';
+import { Alert } from './components/Alert';
 
 function App() {
+  const [history, setHistory] = useState([]);
+  const [currentPair, setCurrentPair] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App container'>
+      {loading && <Spinner />}
+      {error && <Alert setError={setError} error={error} />}
+      <SubscribeForm
+        setHistory={setHistory}
+        setCurrentPair={setCurrentPair}
+        setLoading={setLoading}
+        setError={setError}
+      />
+      <MarketData currentPair={currentPair} />
+      <History history={history} currentPair={currentPair} />
     </div>
   );
 }
