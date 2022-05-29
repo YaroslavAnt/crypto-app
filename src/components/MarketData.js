@@ -13,7 +13,7 @@ export const MarketData = ({ currentPair }) => {
       apikey: process.env.REACT_APP_API_KEY,
       heartbeat: false,
       subscribe_data_type: ['exrate'],
-      subscribe_filter_asset_id: ['BTC/USD'],
+      subscribe_filter_asset_id: [currentPair],
       subscribe_update_limit_ms_exrate: 5000,
     });
 
